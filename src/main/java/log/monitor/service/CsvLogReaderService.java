@@ -3,6 +3,7 @@ package log.monitor.service;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,17 +13,16 @@ import java.util.Map;
 @Service
 class CsvLogReaderService implements LogReaderServiceInterface {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private final BufferedReader bufferedReader;
 
-    public CsvLogReaderService(BufferedReader bufferedReader) {
-        this.bufferedReader = bufferedReader;
+    protected BufferedReader createBufferedReader(String filePath) throws IOException {
+        return new BufferedReader(new FileReader(filePath));
     }
 
     public Map<String, LocalTime> readLogFile(String filePath) {
         Map<String, LocalTime> startTimes = new HashMap<>();
-        try {
+        try (BufferedReader br = createBufferedReader(filePath)) {
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length < 4) continue;
 
