@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The class generates console messages related to Alerts
+ */
 @Service
-public
 class AlertService implements AlertServiceInterface {
     private static final Logger logger =Logger.getLogger(AlertService.class.getName());
     private final long warningThreshold;
