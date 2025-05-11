@@ -1,87 +1,37 @@
-package com.example.logparser;
+# Log Monitor (Homework assignment solution)
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+This is a Java application for calculating monitoring data from a log file and generating warning and error alert messages
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+## Requirements
 
-@SpringBootApplication
-public class LogParserApplication {
+- Java 17
+- Maven 3.9.9
 
-    public static void main(String[] args) {
-        SpringApplication.run(LogParserApplication.class, args);
-    }
+## Installation
 
-    @Bean
-    CommandLineRunner parseLogFile(LogParserService logParserService) {
-        return args -> {
-            String filePath = "src/main/resources/logfile.txt";
-            logParserService.parseLogFile(filePath);
-        };
-    }
-}
+1. Clone the repository:   
+   git clone https://github.com/sebybuga/log-monitor.git
+   cd log-monitor 
 
-// LogParserService - Service following SOLID principles
-package com.example.logparser;
+2. Add your input CSV file in data/logs.log or use the existing one. In case of a new file, the name and structure should be the same with logs.log.   
 
-import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+3. Install Spring dependencies:
+   mvn clean install
 
-@Service
-public class LogParserService {
+4. Run the application 
+   - from IDE: right click on src/main/java/log/monitor/LogMonitor.java and choose Run
+   - form terminal application folder: java -jar target/logmonitor-0.0.1-SNAPSHOT.jar
 
-    public void parseLogFile(String filePath) throws IOException {
-        Path path = Path.of(filePath);
-        List<String> lines = Files.readAllLines(path);
+## Usage
+   The application will read the file and generate the alerts (error and warnings) at a specified time interval. 
+   This interval can be modified using log.scheduler.fixedRate parameter from src/main/resources/application.properties file.
+   
+   Thresholds for warnings and errors can be modified using the following parameters from application.properties:
+   threshold.warning.seconds
+   threshold.error.seconds.
 
-        for (String line : lines) {
-            LogEntryEntity logEntry = LogEntryEntityFactory.createLogEntryEntity(line);
-            System.out.println(logEntry);
-        }
-    }
-}
+   Only one instance of application must run at the same time.
+   
 
-// LogEntryEntity class (using Factory Design Pattern)
-package com.example.logparser;
-
-public class LogEntryEntity {
-private final String timestamp;
-private final String taskName;
-private final String status;
-private final String taskId;
-
-    public LogEntryEntity(String timestamp, String taskName, String status, String taskId) {
-        this.timestamp = timestamp;
-        this.taskName = taskName;
-        this.status = status;
-        this.taskId = taskId;
-    }
-
-    @Override
-    public String toString() {
-        return "LogEntryEntity{" + "timestamp='" + timestamp + '\'' + ", taskName='" + taskName + '\'' + ", status='" + status + '\'' + ", taskId='" + taskId + '\'' + '}';
-    }
-}
-
-// LogEntryEntityFactory (Factory Pattern)
-package com.example.logparser;
-
-public class LogEntryEntityFactory {
-
-    public static LogEntryEntity createLogEntryEntity(String logLine) {
-        String[] parts = logLine.split(",");
-        if (parts.length != 4) {
-            throw new IllegalArgumentException("Invalid log format");
-        }
-        return new LogEntryEntity(parts[0].trim(), parts[1].trim(), parts[2].trim(), parts[3].trim());
-    }
-}
+## Running Tests
+   mvn clean install  - this command also runs tests from src/test folder
