@@ -30,11 +30,11 @@ public class LogParserApplication {
 // LogParserService - Service following SOLID principles
 package com.example.logparser;
 
-import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+        import org.springframework.stereotype.Service;
+        import java.io.IOException;
+        import java.nio.file.Files;
+        import java.nio.file.Path;
+        import java.util.List;
 
 @Service
 public class LogParserService {
@@ -54,10 +54,10 @@ public class LogParserService {
 package com.example.logparser;
 
 public class LogEntryEntity {
-private final String timestamp;
-private final String taskName;
-private final String status;
-private final String taskId;
+    private final String timestamp;
+    private final String taskName;
+    private final String status;
+    private final String taskId;
 
     public LogEntryEntity(String timestamp, String taskName, String status, String taskId) {
         this.timestamp = timestamp;
