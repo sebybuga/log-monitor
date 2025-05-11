@@ -10,16 +10,15 @@ import java.util.logging.Logger;
 
 @Service
 public
-class AlertService {
+class AlertService implements AlertServiceInterface {
     private static final Logger LOGGER = Logger.getLogger(AlertService.class.getName());
-    private long warningThreshold;
-    private long errorThreshold;
-
+    private final long warningThreshold;
+    private final long errorThreshold;
 
 
     public AlertService(AlertConfigInterface alertConfig) {
-        warningThreshold = alertConfig.getWarningThreshold();
-        errorThreshold = alertConfig.getErrorThreshold();
+        this.warningThreshold = alertConfig.getWarningThreshold();
+        this.errorThreshold = alertConfig.getErrorThreshold();
     }
 
     public void logDuration(String jobId, long duration) {

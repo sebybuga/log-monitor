@@ -8,6 +8,6 @@ public class AppConfig {
 
     @Bean
     public AlertConfigInterface alertConfig() {
-        return new AlertConfig("application.properties");
+        return new AlertConfig();
     }
 }

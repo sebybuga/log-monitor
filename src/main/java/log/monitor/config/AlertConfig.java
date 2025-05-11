@@ -1,31 +1,16 @@
 package log.monitor.config;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import org.springframework.beans.factory.annotation.Value;
 
 
 public class AlertConfig implements AlertConfigInterface {
-
+    @Value("${threshold.warning.seconds}")
     private long warningThreshold;
+
+    @Value("${threshold.error.seconds}")
     private long errorThreshold;
 
-    public AlertConfig (String filePath) {
-        Properties properties = new Properties();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
-            if (inputStream == null) {
-                throw new RuntimeException("Properties file not found in classpath: " + filePath);
-            }
-            properties.load(inputStream);
-        } catch (IOException e) {
-            throw new RuntimeException("Error loading application properties", e);
-        }
 
-        this.warningThreshold = Long.parseLong(properties.getProperty("threshold.warning.seconds", "300"));
-        this.errorThreshold = Long.parseLong(properties.getProperty("threshold.error.seconds", "600"));
-
-
-    }
     @Override
     public long getWarningThreshold() {
         return warningThreshold;

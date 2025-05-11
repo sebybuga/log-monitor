@@ -13,6 +13,10 @@ public class Alert {
 
     @Override
     public String toString() {
-        return String.format("[%s] Job %s took %d minutes", level, jobId, duration / 60);
+        if (duration < 60) {
+            return String.format("[%s] Job %s took %d seconds", level, jobId, duration);
+        } else {
+            return String.format("[%s] Job %s took %d minutes", level, jobId, duration / 60);
+        }
     }
 }
