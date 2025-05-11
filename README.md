@@ -1,4 +1,4 @@
-# Log Monitor (Homework assignment solution)
+# Log Monitor
 
 This is a Java application for monitoring data from a log file and generating warning and error alert messages
 
