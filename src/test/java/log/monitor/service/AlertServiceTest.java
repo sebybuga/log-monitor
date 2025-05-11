@@ -37,7 +37,7 @@ class AlertServiceTest {
         alertService = new AlertService(alertConfig);
     }
 
-    @Disabled
+    @Disabled("To be finished later")
     void testLogDuration_AboveErrorThreshold() {
         // Arrange
         String jobId = "job1";
@@ -50,7 +50,7 @@ class AlertServiceTest {
         verify(logger, times(1)).log(eq(Level.SEVERE), anyString());  // Verify logger call with SEVERE level
     }
 
-    @Disabled
+    @Disabled("To be finished later")
     void testLogDuration_AboveWarningThresholdButBelowErrorThreshold() {
         // Arrange
         String jobId = "job2";
@@ -76,7 +76,7 @@ class AlertServiceTest {
         verify(logger, never()).log(any(Level.class), anyString());  // Verify logger call never happens
     }
 
-    @Disabled
+    @Disabled("To be finished later")
     void testLogDurationWithAlertObject() {
         // Arrange
         String jobId = "job4";
