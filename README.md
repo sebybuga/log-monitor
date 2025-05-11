@@ -22,7 +22,7 @@ This is a Java application for calculating monitoring data from a log file and g
    - form terminal application folder: java -jar target/logmonitor-0.0.1-SNAPSHOT.jar
 
 ## Usage
-   The application will read the file and generate the alerts (error and warnings) at a specified time interval (milliseconds). 
+   The application acts like a microservice reading a log file and generating alerts (error and warnings) at a specified time interval (milliseconds). 
    This interval can be modified using log.scheduler.fixedRate parameter from src/main/resources/application.properties file. 
    Default is 30000 ms ->30 seconds. 
    
@@ -35,3 +35,8 @@ This is a Java application for calculating monitoring data from a log file and g
 
 ## Running Tests
    mvn clean install  - this command also runs tests from src/test folder
+
+## Security
+   The application can run on a virtual machine or inside a container. End users access must be denied to such resources.
+   Spring Boot Starter Security, Spring Boot Starter Web, Spring Boot Starter OAuth2 Resource Server and other dependencies can be used if the log file
+   is deployed on an environment which needs authentication.  
