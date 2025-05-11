@@ -19,7 +19,7 @@ This is a Java application for monitoring data from a log file and generating wa
 
 4. Run the application 
    - from IDE: right click on src/main/java/log/monitor/LogMonitor.java and choose Run
-   - form terminal application folder: java -jar target/logmonitor-0.0.1-SNAPSHOT.jar
+   - form terminal application folder: java -jar target/logmonitor-1.0.0-SNAPSHOT.jar
 
 ## Usage
    The application acts like a microservice reading a log file and generating alerts (error and warnings) at a specified time interval (milliseconds).<br> 

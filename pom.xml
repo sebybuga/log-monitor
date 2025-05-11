@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>log.monitor</groupId>
 	<artifactId>logmonitor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>LogMonitor</name>
 	<description>Demo application for Log Monitor</description>
 	<url/>
