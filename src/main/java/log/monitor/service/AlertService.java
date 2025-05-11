@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 @Service
 public
 class AlertService implements AlertServiceInterface {
-    private static final Logger LOGGER = Logger.getLogger(AlertService.class.getName());
+    private static final Logger logger =Logger.getLogger(AlertService.class.getName());
     private final long warningThreshold;
     private final long errorThreshold;
 
@@ -21,13 +21,16 @@ class AlertService implements AlertServiceInterface {
         this.errorThreshold = alertConfig.getErrorThreshold();
     }
 
-    public void logDuration(String jobId, long duration) {
+    public Level logDuration(String jobId, long duration) {
+
         String levelWarning = (duration > warningThreshold) ? "WARNING" : null;
         String level = (duration > errorThreshold) ? "ERROR" : levelWarning;
         if (level != null) {
             Alert alert = new Alert(jobId, duration, level);
             Level alertType = level.equals("ERROR") ? Level.SEVERE : Level.WARNING;
-            LOGGER.log(alertType, alert.toString());
+            logger.log(alertType, alert.toString());
+            return alertType;
         }
+        return null;
     }
 }

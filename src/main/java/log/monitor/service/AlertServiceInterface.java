@@ -1,5 +1,7 @@
 package log.monitor.service;
 
+import java.util.logging.Level;
+
 public interface AlertServiceInterface {
-    void logDuration(String jobId, long duration);
+    Level logDuration(String jobId, long duration);
 }

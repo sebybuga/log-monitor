@@ -11,6 +11,7 @@ public class Alert {
         this.level = level;
     }
 
+
     @Override
     public String toString() {
         if (duration < 60) {
